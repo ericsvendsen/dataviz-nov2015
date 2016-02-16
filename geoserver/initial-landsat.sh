@@ -7,7 +7,7 @@ mkdir -p ${DATA_DIR}
 mkdir -p ${CONFIG_DIR}
 cd ${DATA_DIR}
 
-declare -a arrDays=('025' '041' '073' '105' '121' '153' '201' '217' '249' '281' '313' '345')
+declare -a arrDays=('025' '073' '105' '121' '153' '201' '217' '249' '281' '313' '345')
 
 for d in ${arrDays[@]}
 do
