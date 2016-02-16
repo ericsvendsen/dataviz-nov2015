@@ -11,14 +11,24 @@ declare -a arrDays=('025' '073' '105' '121' '153' '201' '217' '249' '281' '313' 
 
 for d in ${arrDays[@]}
 do
-    wget 'http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015'"${d}"'LGN00/LC80270392015'"${d}"'LGN00_B2.TIF'
-    wget 'http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015'"${d}"'LGN00/LC80270392015'"${d}"'LGN00_B3.TIF'
-    wget 'http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015'"${d}"'LGN00/LC80270392015'"${d}"'LGN00_B4.TIF'
+    #wget 'http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015'"${d}"'LGN00/LC80270392015'"${d}"'LGN00_B2.TIF'
+    #wget 'http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015'"${d}"'LGN00/LC80270392015'"${d}"'LGN00_B3.TIF'
+    #wget 'http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015'"${d}"'LGN00/LC80270392015'"${d}"'LGN00_B4.TIF'
+    wget 'https://s3.amazonaws.com/ais-landsat/LC80270392015'"${d}"'LGN00.tar.gz'
+    tar -xzvf 'LC80270392015'"${d}"'LGN00.tar.gz'
+    rm 'LC80270392015'"${d}"'LGN00.tar.gz'
     gdal_merge.py -separate -o LC80270392015"${d}"LGN00_BV.TIF LC80270392015"${d}"LGN00_B4.TIF LC80270392015"${d}"LGN00_B3.TIF LC80270392015"${d}"LGN00_B2.TIF
+    # Toss all input files
+    ls | grep -v _BV.TIF | xargs rm
 done
 
-# Toss all input files
-ls | grep -v _BV.TIF | xargs rm
+# Create inner tiles and overviews to ensure snappy rendering performance
+for FILE in `ls *.TIF`; do
+    echo ${FILE}
+    gdal_translate -co "TILED=YES" -co "BLOCKXSIZE=512" -co "BLOCKYSIZE=512" ${FILE} tiled_${FILE}
+    gdaladdo -r average tiled_${FILE} 2 4 8 16 32
+    mv tiled_${FILE} ${FILE}
+done
 
 # Copy in the mosaic configuration
 cp /tmp/geoserver/landsat/* ${CONFIG_DIR}
