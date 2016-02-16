@@ -14,7 +14,7 @@ do
     wget 'http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015'"${d}"'LGN00/LC80270392015'"${d}"'LGN00_B2.TIF'
     wget 'http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015'"${d}"'LGN00/LC80270392015'"${d}"'LGN00_B3.TIF'
     wget 'http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015'"${d}"'LGN00/LC80270392015'"${d}"'LGN00_B4.TIF'
-    gdal_merge.py -init 255 -o LC80270392015"${d}"LGN00_BV.TIF LC80270392015"${d}"LGN00_B2.TIF LC80270392015"${d}"LGN00_B3.TIF LC80270392015"${d}"LGN00_B4.TIF
+    gdal_merge.py -separate -o LC80270392015"${d}"LGN00_BV.TIF LC80270392015"${d}"LGN00_B4.TIF LC80270392015"${d}"LGN00_B3.TIF LC80270392015"${d}"LGN00_B2.TIF
 done
 
 # Toss all input files
