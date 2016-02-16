@@ -8,13 +8,13 @@ mkdir -p ${CONFIG_DIR}
 cd ${DATA_DIR}
 
 #declare -a arrDays=('025' '041' '073' '105' '121' '153' '201' '217' '249' '281' '313' '345')
-declare -a arrDays=('025' '041')
+declare -a arrDays=("025" "041")
 
 for d in ${arrDays[@]}
 do
-    wget 'http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015025LGN00/LC80270392015${d}LGN00_B2.TIF'
-    wget 'http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015025LGN00/LC80270392015${d}LGN00_B3.TIF'
-    wget 'http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015025LGN00/LC80270392015${d}LGN00_B4.TIF'
+    wget "http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015025LGN00/LC80270392015"${d}"LGN00_B2.TIF"
+    wget "http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015025LGN00/LC80270392015"${d}"LGN00_B3.TIF"
+    wget "http://landsat-pds.s3.amazonaws.com/L8/027/039/LC80270392015025LGN00/LC80270392015"${d}"LGN00_B4.TIF"
     gdal_merge.py -init 255 -o LC80270392015${d}LGN00_BV.TIF LC80270392015${d}LGN00_B2.TIF LC80270392015${d}LGN00_B3.TIF LC80270392015${d}LGN00_B4.TIF
 done
 
