@@ -8,7 +8,7 @@ RUN  dpkg-divert --local --rename --add /sbin/initctl
 
 #-------------Application Specific Stuff ----------------------------------------------------
 
-RUN apt-get update && apt-get -y install unzip curl gdal-bin python-gdal python
+RUN apt-get update && apt-get -y install unzip curl gdal-bin python-gdal python geotiff-bin imagemagick
 
 ENV GEOSERVER_VERSION 2.8.2
 ENV MARLIN_VERSION 0.7.3.2
