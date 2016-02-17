@@ -18,8 +18,8 @@ do
     convert -combine LC80270392015"${d}"LGN00_B4.TIF LC80270392015"${d}"LGN00_B3.TIF LC80270392015"${d}"LGN00_B2.TIF LC80270392015"${d}"LGN00_RGB.TIF
     convert -channel B -gamma 0.925 -channel R -gamma 1.03 -channel RGB -sigmoidal-contrast 50x16% LC80270392015"${d}"LGN00_RGB.TIF LC80270392015"${d}"LGN00_RGB_CORRECTED.TIF
     convert -depth 8 LC80270392015"${d}"LGN00_RGB_CORRECTED.TIF LC80270392015"${d}"LGN00_RGB_CORRECTED_8bit.TIF
-    listgeo -tfw 4-projected.tif
-    mv 4-projected.tfw LC80270392015"${d}"LGN00_RGB_CORRECTED_8bit.tfw
+    listgeo -tfw LC80270392015"${d}"LGN00_B4.TIF
+    mv LC80270392015"${d}"LGN00_B4.tfw LC80270392015"${d}"LGN00_RGB_CORRECTED_8bit.tfw
     gdal_edit.py -a_srs EPSG:32614 LC80270392015"${d}"LGN00_RGB_CORRECTED_8bit.TIF
     ls | grep -v _8bit.TIF | xargs rm
     #wget 'https://s3.amazonaws.com/ais-landsat/LC80270392015'"${d}"'LGN00.tar.gz'
