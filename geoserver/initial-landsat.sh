@@ -7,7 +7,8 @@ mkdir -p ${DATA_DIR}
 mkdir -p ${CONFIG_DIR}
 cd ${DATA_DIR}
 
-declare -a arrDays=('025' '073' '105' '121' '153' '201' '217' '249' '281' '313' '345')
+#declare -a arrDays=('025' '073' '105' '121' '153' '201' '217' '249' '281' '313' '345')
+declare -a arrDays=('025')
 
 for d in ${arrDays[@]}
 do
@@ -22,7 +23,7 @@ do
     # Combine bands into one RGB image
     convert -combine LC80270392015"${d}"LGN00_B4_PROJECTED.TIF LC80270392015"${d}"LGN00_B3_PROJECTED.TIF LC80270392015"${d}"LGN00_B2_PROJECTED.TIF LC80270392015"${d}"LGN00_RGB.TIF
     # Adjust image color
-    convert -channel B -gamma 1.1 -channel R -gamma 0.9 -channel RGB -sigmoidal-contrast 50x22% LC80270392015"${d}"LGN00_RGB.TIF LC80270392015"${d}"LGN00_RGB_CORRECTED.TIF
+    convert -channel B -gamma 1.1 -channel R -gamma 0.9 -channel RGB -sigmoidal-contrast 50x11% LC80270392015"${d}"LGN00_RGB.TIF LC80270392015"${d}"LGN00_RGB_CORRECTED.TIF
     # Convert to 8 bit image
     convert -depth 8 LC80270392015"${d}"LGN00_RGB_CORRECTED.TIF LC80270392015"${d}"LGN00_RGB_CORRECTED_8bit.TIF
     # Retrieve geo data from base image and reapply it to the corrected 8-bit RGB image
