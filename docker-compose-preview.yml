@@ -1,0 +1,7 @@
+preview:
+  build: preview
+  hostname: preview
+  ports:
+  - "80:80"
+  links:
+  - geoserver:geoserver
