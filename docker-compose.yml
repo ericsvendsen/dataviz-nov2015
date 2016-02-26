@@ -15,6 +15,7 @@ geoserver:
   volumes:
   - ./geoserver_data:/srv/geoserver
   - ./geoserver:/tmp/geoserver
+  - /home/ubuntu/tifs:/tifs
 preview:
   build: preview
   hostname: preview
