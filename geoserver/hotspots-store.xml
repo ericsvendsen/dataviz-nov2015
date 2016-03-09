@@ -1,0 +1,9 @@
+<coverageStore>
+    <name>hotspots</name>
+    <type>ImageMosaic</type>
+    <enabled>true</enabled>
+    <workspace>
+        <name>mosaic</name>
+    </workspace>
+    <url>file:mosaics/hotspots</url>
+</coverageStore>
